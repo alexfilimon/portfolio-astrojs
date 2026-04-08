@@ -20,7 +20,7 @@ export default defineConfig({
     react(),
     icon({
       include: {
-        lucide: ['sun', 'moon', 'globe', 'mail', 'send', 'linkedin', 'github', 'book-open', 'file-text'],
+        lucide: ['sun', 'moon', 'globe', 'mail', 'send', 'linkedin', 'github', 'book-open', 'file-text', 'camera'],
       },
     }),
     sitemap({

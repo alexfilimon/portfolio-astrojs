@@ -62,8 +62,15 @@ const nextDelay = () => (++delayIdx) * 0.1;
     />
   </div>
 
-  {showBlog && (
-    <div class="w-full flex flex-col gap-3">
+  <div class="w-full flex flex-col gap-3">
+    <LinkButton
+      href={t(locale, 'links.photos.url')}
+      label={t(locale, 'links.photos.label')}
+      icon="lucide:camera"
+      variant="telegram"
+      delay={nextDelay()}
+    />
+    {showBlog && (
       <LinkButton
         href={t(locale, 'links.blog.url')}
         label={t(locale, 'links.blog.label')}
@@ -71,6 +78,6 @@ const nextDelay = () => (++delayIdx) * 0.1;
         variant="telegram"
         delay={nextDelay()}
       />
-    </div>
-  )}
+    )}
+  </div>
 </main>
