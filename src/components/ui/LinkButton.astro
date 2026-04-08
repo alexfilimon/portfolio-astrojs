@@ -1,0 +1,47 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export type LinkVariant = 'telegram' | 'email' | 'linkedin' | 'github' | 'resume' | 'default';
+
+interface Props {
+  href: string;
+  label: string;
+  icon: string;
+  variant?: LinkVariant;
+  delay?: number;
+}
+
+const { href, label, icon, variant = 'default', delay = 0 } = Astro.props;
+
+const variantStyles: Record<LinkVariant, string> = {
+  telegram: 'border-[#26A5E4] bg-[#26A5E4]/[0.13] hover:bg-[#26A5E4]/[0.22] dark:bg-[#26A5E4]/[0.16] dark:hover:bg-[#26A5E4]/[0.25]',
+  email: 'border-primary bg-primary/[0.13] hover:bg-primary/[0.22] dark:bg-primary/[0.16] dark:hover:bg-primary/[0.25]',
+  linkedin: 'border-[#0A66C2] bg-[#0A66C2]/[0.13] hover:bg-[#0A66C2]/[0.22] dark:bg-[#0A66C2]/[0.16] dark:hover:bg-[#0A66C2]/[0.25]',
+  github: 'border-[#333] bg-[#333]/[0.10] hover:bg-[#333]/[0.18] dark:border-[#ccc] dark:bg-[#ccc]/[0.12] dark:hover:bg-[#ccc]/[0.20]',
+  resume: 'border-[#D97706] bg-[#D97706]/[0.13] hover:bg-[#D97706]/[0.22] dark:bg-[#D97706]/[0.16] dark:hover:bg-[#D97706]/[0.25]',
+  default: 'border-primary bg-primary/[0.13] hover:bg-primary/[0.22] dark:bg-primary/[0.16] dark:hover:bg-primary/[0.25]',
+};
+
+const iconColors: Record<LinkVariant, string> = {
+  telegram: 'text-[#26A5E4]',
+  email: 'text-primary',
+  linkedin: 'text-[#0A66C2]',
+  github: 'text-[#333] dark:text-[#ccc]',
+  resume: 'text-[#D97706]',
+  default: 'text-primary',
+};
+---
+
+<a
+  href={href}
+  target={href.startsWith('mailto:') ? undefined : '_blank'}
+  rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+  class:list={[
+    'link-button-enter w-full flex items-center gap-3 px-4 py-3 rounded-lg border-[1.5px] text-sm font-medium text-foreground transition-all duration-150 hover:scale-[1.02]',
+    variantStyles[variant],
+  ]}
+  style={`--delay: ${delay}s`}
+>
+  <Icon name={icon} class:list={['w-5 h-5 shrink-0', iconColors[variant]]} />
+  <span>{label}</span>
+</a>

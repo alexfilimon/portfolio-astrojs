@@ -1,0 +1,83 @@
+---
+import '@/styles/globals.css';
+import type { Locale } from '@/i18n/ui';
+import { t, getLocalizedPath } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+  path?: string;
+}
+
+const { locale, path = '/' } = Astro.props;
+const title = t(locale, 'meta.title');
+const description = t(locale, 'meta.description');
+const canonicalUrl = `https://alexfilimon.dev${locale === 'en' ? path : `/${locale}${path}`}`;
+const ogLocale = locale === 'en' ? 'en_US' : 'ru_RU';
+const ogImage = `https://alexfilimon.dev/${locale === 'en' ? 'en' : 'ru'}.banner.png`;
+---
+
+<!doctype html>
+<html lang={locale} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Aleksandr Filimonov" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Alternate languages -->
+    <link rel="alternate" hreflang="en" href={`https://alexfilimon.dev${path}`} />
+    <link rel="alternate" hreflang="ru" href={`https://alexfilimon.dev/ru${path}`} />
+    <link rel="alternate" hreflang="x-default" href={`https://alexfilimon.dev${path}`} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Theme: prevent FOUC -->
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      })();
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    </script>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Aleksandr Filimonov",
+      "jobTitle": "Senior iOS Developer",
+      "url": "https://alexfilimon.dev",
+      "sameAs": [
+        "https://github.com/alexfilimon",
+        "https://www.linkedin.com/in/alexfilimon/",
+        "https://t.me/alexfilimon"
+      ]
+    })} />
+  </head>
+  <body class="min-h-screen flex flex-col items-center">
+    <slot />
+  </body>
+</html>

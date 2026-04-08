@@ -1,0 +1,17 @@
+---
+import type { Locale } from '@/i18n/ui';
+import { t } from '@/i18n/ui';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from './ThemeToggle.tsx';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<header class="w-full max-w-md mx-auto px-6 pt-6 pb-2 flex items-center justify-between">
+  <LanguageSwitcher locale={locale} />
+  <ThemeToggle label={t(locale, 'theme.toggle')} client:load />
+</header>

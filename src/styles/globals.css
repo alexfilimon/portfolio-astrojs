@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 75 33% 97%;
+    --foreground: 240 10% 3.9%;
+    --primary: 85 78% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 80 20% 93%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 80 10% 93%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 80 20% 93%;
+    --accent-foreground: 240 5.9% 10%;
+    --border: 80 10% 88%;
+    --input: 80 10% 88%;
+    --ring: 85 78% 35%;
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 100 20% 4%;
+    --foreground: 0 0% 98%;
+    --primary: 84 81% 44%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 100 10% 14%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 100 10% 14%;
+    --muted-foreground: 80 5% 55%;
+    --accent: 100 10% 14%;
+    --accent-foreground: 0 0% 98%;
+    --border: 100 10% 16%;
+    --input: 100 10% 16%;
+    --ring: 84 81% 44%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+.profile-enter {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.link-button-enter {
+  opacity: 0;
+  animation: button-entrance 0.5s ease-out forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes button-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

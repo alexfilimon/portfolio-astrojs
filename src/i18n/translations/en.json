@@ -1,0 +1,21 @@
+{
+  "meta.title": "Aleksandr Filimonov — Senior iOS Developer",
+  "meta.description": "Links, contacts and projects by Aleksandr Filimonov",
+  "profile.name": "Aleksandr Filimonov",
+  "profile.subtitle": "Senior iOS Developer",
+  "links.telegram.label": "Telegram",
+  "links.telegram.url": "https://t.me/alexfilimon",
+  "links.email.label": "Email",
+  "links.email.url": "mailto:info@alexfilimon.dev",
+  "links.linkedin.label": "LinkedIn",
+  "links.linkedin.url": "https://www.linkedin.com/in/alexfilimon/",
+  "links.github.label": "GitHub",
+  "links.github.url": "https://github.com/alexfilimon",
+  "links.resume.label": "Resume",
+  "links.blog.label": "Blog in Telegram",
+  "links.blog.url": "https://t.me/alexfilimon_blog",
+  "footer.copyright": "© 2026 Aleksandr Filimonov",
+  "theme.toggle": "Toggle theme",
+  "language.switch.label": "RU",
+  "language.current": "EN"
+}

@@ -1,0 +1,16 @@
+{
+  "meta.title": "Александр Филимонов — Senior iOS Developer",
+  "meta.description": "Ссылки, контакты и проекты Александра Филимонова",
+  "profile.name": "Александр Филимонов",
+  "profile.subtitle": "Senior iOS Developer",
+  "links.telegram.label": "Телеграм",
+  "links.email.label": "Почта",
+  "links.linkedin.label": "LinkedIn",
+  "links.github.label": "GitHub",
+  "links.resume.label": "Резюме",
+  "links.blog.label": "Блог в телеграм",
+  "footer.copyright": "© 2026 Александр Филимонов",
+  "theme.toggle": "Сменить тему",
+  "language.switch.label": "EN",
+  "language.current": "RU"
+}

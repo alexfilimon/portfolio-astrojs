@@ -1,0 +1,76 @@
+---
+import type { Locale } from '@/i18n/ui';
+import { t } from '@/i18n/ui';
+import ProfileCard from '@/components/ui/ProfileCard.astro';
+import LinkButton from '@/components/ui/LinkButton.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const showBlog = locale === 'ru';
+let delayIdx = 0;
+const nextDelay = () => (++delayIdx) * 0.1;
+---
+
+<main class="w-full max-w-md mx-auto px-6 py-6 flex flex-col items-center gap-8">
+  <ProfileCard
+    name={t(locale, 'profile.name')}
+    subtitle={t(locale, 'profile.subtitle')}
+    avatarSrc="/avatar_alex.jpg"
+  />
+
+  <div class="w-full flex flex-col gap-3">
+    <LinkButton
+      href={t(locale, 'links.telegram.url')}
+      label={t(locale, 'links.telegram.label')}
+      icon="lucide:send"
+      variant="telegram"
+      delay={nextDelay()}
+    />
+    <LinkButton
+      href={t(locale, 'links.email.url')}
+      label={t(locale, 'links.email.label')}
+      icon="lucide:mail"
+      variant="email"
+      delay={nextDelay()}
+    />
+  </div>
+
+  <div class="w-full flex flex-col gap-3">
+    <LinkButton
+      href={t(locale, 'links.linkedin.url')}
+      label={t(locale, 'links.linkedin.label')}
+      icon="lucide:linkedin"
+      variant="linkedin"
+      delay={nextDelay()}
+    />
+    <LinkButton
+      href={t(locale, 'links.github.url')}
+      label={t(locale, 'links.github.label')}
+      icon="lucide:github"
+      variant="github"
+      delay={nextDelay()}
+    />
+    <LinkButton
+      href="/Main_resume_New.pdf"
+      label={t(locale, 'links.resume.label')}
+      icon="lucide:file-text"
+      variant="resume"
+      delay={nextDelay()}
+    />
+  </div>
+
+  {showBlog && (
+    <div class="w-full flex flex-col gap-3">
+      <LinkButton
+        href={t(locale, 'links.blog.url')}
+        label={t(locale, 'links.blog.label')}
+        icon="lucide:book-open"
+        variant="telegram"
+        delay={nextDelay()}
+      />
+    </div>
+  )}
+</main>

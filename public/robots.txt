@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alexfilimon.dev/sitemap-index.xml
