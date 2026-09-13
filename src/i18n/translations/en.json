@@ -1,6 +1,6 @@
 {
   "meta.title": "Aleksandr Filimonov — Senior iOS Developer",
-  "meta.description": "Links, contacts and projects by Aleksandr Filimonov",
+  "meta.description": "iOS developer in London. I build apps, advise developers and teams, and share my experience and photography.",
   "profile.name": "Aleksandr Filimonov",
   "profile.subtitle": "Senior iOS Developer",
   "links.telegram.label": "Telegram",
@@ -94,7 +94,7 @@
   "consulting.index.about.first": "I work as a Senior iOS Developer at DoorDash (Deliveroo). Previously, I worked at VKontakte, Prequel, Surf and a startup. My experience includes product development, international teams and complex iOS engineering tasks.",
   "consulting.index.about.second": "I live in London and hold a UK Global Talent Visa. I prepared my entire application myself and have helped other applicants review their materials.",
   "consulting.index.about.linkedin": "Experience on LinkedIn",
-  "consulting.meta.description": "iOS interview preparation, AVFoundation and Core Image support, project reviews and engineering consulting with Aleksandr Filimonov.",
+  "consulting.meta.description": "iOS interview preparation in English, help with photo and video on iOS, and consulting for teams.",
   "home.personal.blog": "Blog on Telegram",
   "home.visa": "UK Global Talent Visa holder",
   "home.telegram": "Telegram",
@@ -104,5 +104,6 @@
   "gallery.play": "Start slideshow",
   "home.career.current": "DoorDash (Deliveroo)",
   "home.career.previous": "· ex-VKontakte, ex-Prequel",
-  "consulting.index.services.discuss": "Let’s discuss"
+  "consulting.index.services.discuss": "Let’s discuss",
+  "meta.image.alt": "Portrait of Aleksandr Filimonov alongside his name and the title Senior iOS Dev."
 }

@@ -1,6 +1,6 @@
 {
   "meta.title": "Александр Филимонов — Senior iOS Developer",
-  "meta.description": "Ссылки, контакты и проекты Александра Филимонова",
+  "meta.description": "iOS-разработчик в Лондоне. Разрабатываю приложения, консультирую разработчиков и команды, делюсь опытом и фотографиями.",
   "profile.name": "Александр Филимонов",
   "profile.subtitle": "Senior iOS Developer",
   "links.telegram.label": "Телеграм",
@@ -88,7 +88,7 @@
   "consulting.index.about.first": "Работаю Senior iOS Developer в DoorDash (Deliveroo). Ранее — во ВКонтакте, Prequel, Surf и стартапе. В моём опыте — продуктовая разработка, международные команды и сложные инженерные задачи на iOS.",
   "consulting.index.about.second": "Живу в Лондоне. Обладатель UK Global Talent Visa: полностью подготовил свой кейс самостоятельно и помогал другим заявителям с ревью материалов.",
   "consulting.index.about.linkedin": "Опыт в LinkedIn",
-  "consulting.meta.description": "Александр Филимонов: подготовка к iOS-интервью на английском, ревью Global Talent Visa, AVFoundation, Core Image и помощь командам.",
+  "consulting.meta.description": "Подготовка к iOS-собеседованиям на английском, разбор заявок на Global Talent Visa, помощь с фото и видео на iOS и консультации для команд.",
   "home.personal.blog": "Блог в Telegram",
   "home.visa": "UK Global Talent Visa holder",
   "home.telegram": "Telegram",
@@ -104,5 +104,6 @@
   "links.blog.url": "https://t.me/iphone_filimon",
   "links.email.url": "mailto:info@alexfilimon.dev",
   "links.telegram.url": "https://t.me/alexfilimon",
-  "consulting.index.services.discuss": "Обсудить"
+  "consulting.index.services.discuss": "Обсудить",
+  "meta.image.alt": "Портрет Александра Филимонова с его именем и подписью Senior iOS Dev."
 }

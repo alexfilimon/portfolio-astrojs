@@ -2,7 +2,7 @@
 import '@/styles/globals.css';
 import '@/styles/brand.css';
 import type { Locale } from '@/i18n/ui';
-import { t, getLocalizedPath } from '@/i18n/ui';
+import { t } from '@/i18n/ui';
 
 interface Props {
   locale: Locale;
@@ -29,6 +29,7 @@ const ogImage = `https://alexfilimon.dev/${locale === 'en' ? 'en' : 'ru'}.banner
     <link rel="canonical" href={canonicalUrl} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=af-1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
     <!-- Alternate languages -->
     {translated && <>
@@ -41,6 +42,11 @@ const ogImage = `https://alexfilimon.dev/${locale === 'en' ? 'en' : 'ru'}.banner
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="2293" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:image:alt" content={t(locale, 'meta.image.alt')} />
+    <meta property="og:site_name" content="alexfilimon.dev" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={ogLocale} />
@@ -50,6 +56,7 @@ const ogImage = `https://alexfilimon.dev/${locale === 'en' ? 'en' : 'ru'}.banner
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={t(locale, 'meta.image.alt')} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
