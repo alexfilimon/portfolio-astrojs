@@ -1,0 +1,22 @@
+---
+import { t, type Locale } from '@/i18n/ui';
+import ConsultingLayout from '@/layouts/ConsultingLayout.astro';
+import Contact from '@/components/consulting/Contact.astro';
+import { services as russianServices } from '@/data/consulting';
+import { englishServices } from '@/data/consulting-en';
+import {Icon} from 'astro-icon/components';
+interface Props {service: (typeof russianServices)[number];locale?: Locale;}
+const { service,locale='ru' } = Astro.props;const ru=locale==='ru';const services=ru?russianServices:englishServices;const base=ru?'/ru/consulting/':'/consulting/';
+const icons:Record<string,string>={interview:'user-round','global-talent':'globe','photo-video':'camera',teams:'users'};
+---
+<ConsultingLayout locale={locale} title={service.title} description={service.summary} path={`/consulting/${service.slug}/`} detail>
+ <div class="consulting-intro-grid">
+  <section class="consulting-hero detail-hero consult-card"><div class="detail-category"><Icon name={`lucide:${icons[service.slug]}`}/><span class="consult-label">{t(locale, 'navigation.consulting')} · {service.number}</span></div><h1>{service.title}</h1><p class="detail-intro">{service.intro}</p><a class="consult-action" href="https://t.me/alexfilimon" target="_blank" rel="noopener noreferrer"><Icon name="lucide:send"/>{t(locale, 'consulting.discuss')} <span aria-hidden="true">↗</span></a><span class="consult-free">{t(locale, 'consulting.introduction.free')}</span></section>
+  <aside class="consulting-prepare consult-card"><Icon name="lucide:mail"/><h2>{t(locale, 'consulting.prepare.title')}</h2><p>{service.prepare}</p><span class="prepare-caption">{t(locale, 'consulting.prepare.caption')}</span></aside>
+ </div>
+ <section class="consulting-details" aria-labelledby="help-title"><h2 id="help-title" class="consult-section-title">{service.heading}</h2><div class="detail-items">{service.items.map(([title,text],i)=><article class="consult-card"><span class="detail-item-number">0{i+1}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+ {'note' in service&&<aside class="service-note consult-card"><Icon name="lucide:file-text"/><div><h2>{t(locale, 'consulting.note.title')}</h2><p>{service.note}</p></div></aside>}
+ <section class="consulting-format consult-card"><h2>{t(locale, 'consulting.format')}</h2><p>{service.format}</p></section>
+ <Contact locale={locale}/>
+ <nav class="other-services" aria-label={t(locale, 'consulting.other.label')}><h2 class="consult-section-title">{t(locale, 'consulting.other.title')}</h2><div>{services.filter(item=>item.slug!==service.slug).map(item=><a class="consult-card" href={`${base}${item.slug}/`}><Icon name={`lucide:${icons[item.slug]}`}/><span>{item.title}</span><span aria-hidden="true">↗</span></a>)}</div></nav>
+</ConsultingLayout>

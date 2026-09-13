@@ -1,0 +1,14 @@
+---
+import { t } from '@/i18n/ui';
+import ConsultingLayout from '@/layouts/ConsultingLayout.astro';
+import Contact from '@/components/consulting/Contact.astro';
+import {englishServices} from '@/data/consulting-en';
+import {Icon} from 'astro-icon/components';
+const locale = 'en' as const;
+const icons=['user-round','camera','users'];
+---
+<ConsultingLayout locale="en" title={t(locale, 'navigation.consulting')} description={t(locale, 'consulting.meta.description')} path="/consulting/">
+ <div class="consulting-intro-grid"><section class="consulting-hero consult-card"><h1>{t(locale, 'consulting.index.title')}</h1><p class="consulting-lead">{t(locale, 'consulting.index.lead.first')}<br/>{t(locale, 'consulting.index.lead.second')}</p><p class="consulting-description">{t(locale, 'consulting.index.description')}</p><a class="consult-action" href="https://t.me/alexfilimon" target="_blank" rel="noopener noreferrer"><Icon name="lucide:send"/>{t(locale, 'consulting.index.cta')} <span aria-hidden="true">↗</span></a><span class="consult-free">{t(locale, 'consulting.index.free')}</span></section><aside class="consulting-author consult-card"><a class="author-identity" href="/"><img src="/avatar_alex.jpg" alt={t(locale, 'profile.name')} width="88" height="96"/><strong>{t(locale, 'consulting.index.author.firstName')}<br/>{t(locale, 'consulting.index.author.lastName')}</strong></a><p>{t(locale, 'consulting.index.author.role')}<br/>{t(locale, 'consulting.index.author.company')}</p><div class="author-experience"><strong>10+ <span>{t(locale, 'consulting.index.years.tech')}</span></strong><strong>8+ <span>{t(locale, 'consulting.index.years.ios')}</span></strong></div><p class="author-previous">{t(locale, 'consulting.index.author.previous')}</p></aside></div>
+ <section class="consulting-directions" aria-labelledby="services-title"><h2 class="consult-section-title" id="services-title">{t(locale, 'consulting.index.services.title')}</h2><div class="consulting-service-grid">{englishServices.map((service,i)=><article class="consulting-service-card consult-card"><div class="service-card-top"><Icon name={`lucide:${icons[i]}`}/><span>{service.number}</span></div><h3>{service.title}</h3><p>{service.summary}</p><a class="consult-card-link" href="https://t.me/alexfilimon" target="_blank" rel="noopener noreferrer" aria-label={`${t(locale, 'consulting.index.services.discuss')}: ${service.title}`}><Icon name="lucide:send"/>{t(locale, 'consulting.index.services.discuss')} <span aria-hidden="true">↗</span></a></article>)}</div></section>
+ <Contact locale="en" other/>
+</ConsultingLayout>

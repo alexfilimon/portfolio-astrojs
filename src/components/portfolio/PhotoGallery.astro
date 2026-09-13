@@ -1,0 +1,18 @@
+---
+import { t, type Locale } from '@/i18n/ui';
+import {Image} from 'astro:assets';
+import {photos} from '@/data/photos';
+import '@/styles/photo-gallery.css';
+interface Props {locale?: Locale;}
+const {locale='ru'}=Astro.props;const ru=locale==='ru';
+---
+<photo-gallery class="portfolio-gallery surface" role="region" aria-roledescription={t(locale, 'gallery.carousel')} aria-label={t(locale, 'gallery.label')} data-locale={locale} data-play-label={t(locale, 'gallery.play')} data-pause-label={t(locale, 'gallery.pause')} data-transition="zoom">
+ <div class="gallery-stage" tabindex="0" aria-label={t(locale, 'gallery.instructions')}>
+  {photos.map((photo,i)=><div class="gallery-slide" data-photo-id={photo.id} role="group" aria-roledescription={t(locale, 'gallery.slide')} aria-label={`${i+1} / ${photos.length}`} aria-hidden={i!==0} data-active={i===0?"true":undefined}><Image src={photo.src} alt={ru?photo.ru:photo.en} width={1000} widths={[400,700,1000]} sizes="(max-width: 760px) 100vw, 520px" format="webp" quality={82} loading="lazy" decoding="async" draggable="false"/></div>)}
+  <button class="gallery-arrow gallery-prev" type="button" aria-label={t(locale, 'gallery.previous')}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 5-7 7 7 7"/></svg></button><button class="gallery-arrow gallery-next" type="button" aria-label={t(locale, 'gallery.next')}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 5 7 7-7 7"/></svg></button>
+ </div>
+ <button class="gallery-pause" type="button" aria-label={t(locale, 'gallery.pause')}><svg class="gallery-pause-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg><svg class="gallery-play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 5.8a.8.8 0 0 0-1.2.7v11a.8.8 0 0 0 1.2.7l9-5.5a.8.8 0 0 0 0-1.4z"/></svg></button><span class="gallery-status" role="status" aria-live="polite"></span>
+</photo-gallery>
+<script>
+ import './photo-gallery';
+</script>

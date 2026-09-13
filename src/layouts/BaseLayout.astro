@@ -1,16 +1,18 @@
 ---
 import '@/styles/globals.css';
+import '@/styles/brand.css';
 import type { Locale } from '@/i18n/ui';
 import { t, getLocalizedPath } from '@/i18n/ui';
 
 interface Props {
   locale: Locale;
   path?: string;
+  title?: string;
+  description?: string;
+  translated?: boolean;
 }
 
-const { locale, path = '/' } = Astro.props;
-const title = t(locale, 'meta.title');
-const description = t(locale, 'meta.description');
+const { locale, path = '/', title = t(locale, 'meta.title'), description = t(locale, 'meta.description'), translated = true } = Astro.props;
 const canonicalUrl = `https://alexfilimon.dev${locale === 'en' ? path : `/${locale}${path}`}`;
 const ogLocale = locale === 'en' ? 'en_US' : 'ru_RU';
 const ogImage = `https://alexfilimon.dev/${locale === 'en' ? 'en' : 'ru'}.banner.png`;
@@ -23,15 +25,17 @@ const ogImage = `https://alexfilimon.dev/${locale === 'en' ? 'en' : 'ru'}.banner
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Aleksandr Filimonov" />
+    <meta name="author" content={t(locale, 'meta.author')} />
     <link rel="canonical" href={canonicalUrl} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=af-1" />
 
     <!-- Alternate languages -->
+    {translated && <>
     <link rel="alternate" hreflang="en" href={`https://alexfilimon.dev${path}`} />
     <link rel="alternate" hreflang="ru" href={`https://alexfilimon.dev/ru${path}`} />
     <link rel="alternate" hreflang="x-default" href={`https://alexfilimon.dev${path}`} />
+    </>}
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
@@ -50,7 +54,7 @@ const ogImage = `https://alexfilimon.dev/${locale === 'en' ? 'en' : 'ru'}.banner
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rubik:wght@400&display=swap" rel="stylesheet" />
 
     <!-- Theme: prevent FOUC -->
     <script is:inline>
@@ -67,8 +71,8 @@ const ogImage = `https://alexfilimon.dev/${locale === 'en' ? 'en' : 'ru'}.banner
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "Aleksandr Filimonov",
-      "jobTitle": "Senior iOS Developer",
+      "name": t(locale, 'meta.author'),
+      "jobTitle": t(locale, 'profile.subtitle'),
       "url": "https://alexfilimon.dev",
       "sameAs": [
         "https://github.com/alexfilimon",
@@ -77,7 +81,7 @@ const ogImage = `https://alexfilimon.dev/${locale === 'en' ? 'en' : 'ru'}.banner
       ]
     })} />
   </head>
-  <body class="min-h-screen flex flex-col items-center">
+  <body class="portfolio-site min-h-screen flex flex-col items-center">
     <slot />
   </body>
 </html>

@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import icon from 'astro-icon';
 import sitemap from '@astrojs/sitemap';
@@ -13,14 +13,12 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+  vite: { plugins: [tailwindcss()] },
   integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
     react(),
     icon({
       include: {
-        lucide: ['sun', 'moon', 'globe', 'mail', 'send', 'linkedin', 'github', 'book-open', 'file-text', 'camera'],
+        lucide: ['sun', 'moon', 'globe', 'mail', 'send', 'linkedin', 'github', 'book-open', 'file-text', 'camera', 'user-round', 'users'],
       },
     }),
     sitemap({

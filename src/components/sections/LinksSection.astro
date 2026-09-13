@@ -21,6 +21,10 @@ const nextDelay = () => (++delayIdx) * 0.1;
     avatarSrc="/avatar_alex.jpg"
   />
 
+  {locale === 'ru' && (
+    <LinkButton href="/ru/consulting/" label={t(locale, 'navigation.consulting')} icon="lucide:book-open" delay={nextDelay()} />
+  )}
+
   <div class="w-full flex flex-col gap-3">
     <LinkButton
       href={t(locale, 'links.telegram.url')}

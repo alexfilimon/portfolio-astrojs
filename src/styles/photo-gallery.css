@@ -1,0 +1,20 @@
+/* Full-bleed photography tile, sharing the surrounding bento corners. */
+.portfolio-gallery{grid-area:gallery;position:relative;display:block;overflow:hidden;min-width:0;min-height:320px;isolation:isolate}
+.gallery-stage{position:absolute;inset:0;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;background:var(--site-surface)}
+.gallery-slide{position:absolute;inset:0;opacity:0;pointer-events:none}
+.gallery-slide[data-active]{opacity:1}
+.portfolio-gallery[data-dragging] .gallery-stage{cursor:grabbing}
+.gallery-slide img{display:block;width:100%;height:100%;object-fit:cover}
+.gallery-arrow,.gallery-pause{position:absolute;z-index:2;border:0;padding:0;background:none;color:#fff;cursor:pointer;display:grid;place-items:center;filter:drop-shadow(0 1px 3px #0008)}
+.gallery-arrow{top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;font-size:22px}
+.gallery-prev{left:16px}.gallery-next{right:16px}
+.gallery-pause{right:14px;bottom:14px;width:44px;height:44px;border-radius:50%;font-size:15px}
+.gallery-arrow svg{width:25px;height:25px}.gallery-pause svg{width:20px;height:20px}.gallery-arrow svg,.gallery-pause svg{opacity:.8;transition:opacity .2s,transform .2s}.gallery-arrow:hover svg,.gallery-pause:hover svg{opacity:1;transform:scale(1.08)}
+.gallery-play-icon{display:none}.gallery-pause[data-paused="true"] .gallery-play-icon{display:block}.gallery-pause[data-paused="true"] .gallery-pause-icon{display:none}
+.gallery-pause:disabled{display:none}
+.gallery-status{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.portfolio-gallery:not(:defined) .gallery-arrow,.portfolio-gallery:not(:defined) .gallery-pause{display:none}
+@media(hover:hover) and (pointer:fine){.gallery-arrow,.gallery-pause{opacity:0;pointer-events:none;transition:opacity .2s}.portfolio-gallery:hover .gallery-arrow,.portfolio-gallery:has(:focus-visible) .gallery-arrow,.portfolio-gallery:hover .gallery-pause,.portfolio-gallery:has(:focus-visible) .gallery-pause{opacity:1;pointer-events:auto}}
+@media(any-pointer:coarse){.gallery-arrow,.gallery-pause{opacity:1;pointer-events:auto}}
+@media(prefers-reduced-motion:reduce){.gallery-slide,.gallery-arrow,.gallery-pause,.gallery-arrow svg,.gallery-pause svg{transition:none}}
+@media(max-width:760px){.portfolio-gallery{aspect-ratio:3/2;min-height:0}}

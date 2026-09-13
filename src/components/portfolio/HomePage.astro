@@ -1,0 +1,74 @@
+---
+import { t, type Locale } from '@/i18n/ui';
+import {Icon} from 'astro-icon/components';
+import SiteHeader from './SiteHeader.astro';
+import PhotoGallery from './PhotoGallery.astro';
+import '@/styles/portfolio.css';
+interface Props {locale?: Locale;}
+const {locale='ru'}=Astro.props;const ru=locale==='ru';
+const help=[
+ {slug:'interview',icon:'user-round',title:t(locale, 'home.services.interview.title'),description:t(locale, 'home.services.interview.description')},
+ {slug:'global-talent',icon:'globe',title:t(locale, 'home.services.global-talent.title'),description:t(locale, 'home.services.global-talent.description')},
+ {slug:'photo-video',icon:'camera',title:t(locale, 'home.services.photo-video.title'),description:t(locale, 'home.services.photo-video.description')},
+ {slug:'teams',icon:'users',title:t(locale, 'home.services.teams.title'),description:t(locale, 'home.services.teams.description')},
+];
+const links=[{icon:'github',label:t(locale, 'links.github.label'),href:'https://github.com/alexfilimon'},{icon:'linkedin',label:t(locale, 'links.linkedin.label'),href:'https://www.linkedin.com/in/alexfilimon/'},{icon:'file-text',label:t(locale, 'home.resume'),href:'/Main_resume_New.pdf'}];
+---
+<a class="portfolio-skip" href="#main-content">{t(locale, 'navigation.skip')}</a>
+<div class="portfolio-shell">
+ <SiteHeader locale={locale}/>
+ <main id="main-content" class:list={['portfolio-grid',{'portfolio-grid-en':!ru}]}>
+  <section class="portfolio-profile surface" aria-labelledby="profile-name">
+   <img class="portfolio-avatar" src="/avatar_alex.jpg" alt={t(locale, 'profile.name')} width="144" height="160" fetchpriority="high"/>
+   <h1 id="profile-name">{t(locale, 'profile.name')}</h1>
+   <p class="portfolio-role">{t(locale, 'profile.subtitle')} <span aria-hidden="true">·</span> {t(locale, 'profile.city')}</p>
+   <p class="portfolio-intro">{t(locale, 'home.intro.first')}{t(locale, 'home.intro.second') && <><br/>{t(locale, 'home.intro.second')}</>}</p>
+   <p class="portfolio-career">{t(locale, 'home.career.current')} <span>{t(locale, 'home.career.previous')}</span></p>
+  </section>
+  <a class="portfolio-contact portfolio-telegram surface" href="https://t.me/alexfilimon" target="_blank" rel="noopener noreferrer"><Icon name="lucide:send"/><span><strong>{t(locale, 'home.telegram')}</strong><small>@alexfilimon</small></span><span class="contact-chevron" aria-hidden="true">›</span></a>
+  <a class="portfolio-contact portfolio-mail surface" href="mailto:info@alexfilimon.dev"><Icon name="lucide:mail"/><span><strong>{t(locale, 'links.email.label')}</strong><small>info@alexfilimon.dev</small></span><span class="contact-chevron" aria-hidden="true">›</span></a>
+  <section class="portfolio-services surface" aria-labelledby="help-title">
+   <h2 id="help-title">{t(locale, 'home.help.title')}</h2>
+   <div class="portfolio-service-list">{help.filter(service => ru || service.slug !== 'global-talent').map(service=><a href="https://t.me/alexfilimon" target="_blank" rel="noopener noreferrer" class="portfolio-service"><Icon name={`lucide:${service.icon}`}/><div><h3>{service.title}</h3><p>{service.description}</p></div><span class="service-chevron" aria-hidden="true">↗</span></a>)}</div>
+   <div class="portfolio-service-footer"><a href="https://t.me/alexfilimon" target="_blank" rel="noopener noreferrer">{t(locale, 'consulting.introduction.free')}</a><a href={ru?'/ru/consulting/':'/consulting/'}>{t(locale, 'home.help.about')} <span aria-hidden="true">↗</span></a></div>
+  </section>
+  <section class="portfolio-experience surface" aria-label={t(locale, 'home.experience.label')}>
+   <div class="portfolio-years"><p>10+ <span>{t(locale, 'profile.years.tech')}</span></p><p>8+ <span>{t(locale, 'profile.years.ios')}</span></p></div>
+   <p class="portfolio-experience-copy">{t(locale, 'home.experience.description')}</p>
+   <p class="portfolio-visa">{t(locale, 'home.visa')}</p>
+  </section>
+  <section class="portfolio-work surface" aria-labelledby="work-title"><h2 id="work-title">{t(locale, 'home.work.title')}</h2><p>{t(locale, 'home.work.description')}</p><div class="portfolio-social-links">{links.map(link=><a href={link.href} target="_blank" rel="noopener noreferrer"><Icon name={`lucide:${link.icon}`}/>{link.label}</a>)}</div></section>
+  <section class="portfolio-personal surface" aria-labelledby="personal-title"><svg class="photo-channel-arrow" aria-hidden="true" fill="none"><path class="photo-channel-line"/><path class="photo-channel-tip"/></svg><h2 id="personal-title">{t(locale, 'home.personal.title')}</h2><p>{t(locale, 'home.personal.description')}</p><div class="portfolio-social-links"><a href="https://t.me/alexfilimon_photos" target="_blank" rel="noopener noreferrer"><Icon name="lucide:camera"/>{t(locale, 'home.personal.photos')}</a>{ru&&<a href="https://t.me/iphone_filimon" target="_blank" rel="noopener noreferrer"><Icon name="lucide:book-open"/>{t(locale, 'home.personal.blog')}</a>}</div></section>
+  <PhotoGallery locale={locale}/>
+ </main>
+ <footer class="portfolio-footer"><span>© {new Date().getFullYear()} {t(locale, 'profile.name')}</span></footer>
+</div>
+
+<script>
+ const personal = document.querySelector<HTMLElement>('.portfolio-personal');
+ const channel = personal?.querySelector<HTMLAnchorElement>('a[href="https://t.me/alexfilimon_photos"]');
+ if(personal && channel){
+  const svg = personal.querySelector<SVGSVGElement>('.photo-channel-arrow')!;
+  const draw = () => {
+   const box=personal.getBoundingClientRect(), link=channel.getBoundingClientRect();
+   const mobile=matchMedia('(max-width:760px)').matches;
+   const endX=link.left-box.left+Math.min(link.width*.6,90), endY=link.top-box.top-8;
+   const lane=endY-16, right=box.width-24;
+   const startX=mobile?right:box.width-18, startY=mobile?22:58;
+   const curl=endX+(right-endX)*.55;
+   // Matching control-point tangents keep the loop smooth at every join.
+   const entry=mobile
+    ? `M ${startX} ${startY} C ${right} ${startY+40}, ${right} ${lane}, ${right-38} ${lane}`
+    : `M ${startX} ${startY} C ${startX-62} ${startY}, ${right+12} ${lane}, ${right-38} ${lane}`;
+   svg.setAttribute('viewBox',`0 0 ${box.width} ${box.height}`);
+   svg.querySelector('.photo-channel-line')!.setAttribute('d',`${entry}
+    C ${right-76} ${lane}, ${curl+4} ${lane+10}, ${curl-20} ${lane-6}
+    C ${curl-44} ${lane-22}, ${curl-24} ${lane-48}, ${curl} ${lane-44}
+    C ${curl+24} ${lane-40}, ${curl+32} ${lane-16}, ${curl+8} ${lane-4}
+    C ${curl-16} ${lane+8}, ${endX+14} ${lane-32}, ${endX} ${endY}`);
+   svg.querySelector('.photo-channel-tip')!.setAttribute('d',`M ${endX-7} ${endY-10} L ${endX} ${endY} L ${endX+10} ${endY-6}`);
+  };
+  const observer=new ResizeObserver(draw);observer.observe(personal);observer.observe(channel);
+  window.addEventListener('resize',draw);document.fonts.ready.then(draw);draw();
+ }
+</script>

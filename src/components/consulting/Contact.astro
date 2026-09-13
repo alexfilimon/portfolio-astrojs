@@ -1,0 +1,11 @@
+---
+import { t, type Locale } from '@/i18n/ui';
+import {Icon} from 'astro-icon/components';
+interface Props { other?: boolean; locale?: Locale; }
+const { other = false,locale='ru' } = Astro.props;
+const ru=locale==='ru';
+---
+<section class="consulting-contact consult-card" aria-labelledby="contact-title">
+ <div class="consulting-contact-copy"><h2 id="contact-title">{t(locale, other ? 'contact.other.title' : 'contact.title')}</h2><p>{t(locale, other ? 'contact.other.description' : 'contact.description')}</p><p class="contact-terms">{t(locale, 'contact.terms')}</p></div>
+ <div class="consulting-contact-links"><a href="https://t.me/alexfilimon" target="_blank" rel="noopener noreferrer"><Icon name="lucide:send"/><span><strong>{t(locale, 'contact.telegram')}</strong><small>@alexfilimon</small></span><span aria-hidden="true">↗</span></a><a href="mailto:info@alexfilimon.dev"><Icon name="lucide:mail"/><span><strong>{t(locale, 'links.email.label')}</strong><small>info@alexfilimon.dev</small></span><span aria-hidden="true">↗</span></a></div>
+</section>

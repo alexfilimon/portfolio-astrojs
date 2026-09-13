@@ -1,0 +1,23 @@
+---
+import { t, type Locale } from '@/i18n/ui';
+import BrandLogo from './BrandLogo.astro';
+import { Icon } from 'astro-icon/components';
+interface Props {locale?: Locale;active?:'home'|'consulting';path?:string;translated?:boolean;}
+const {locale='ru',active='home',path='/',translated=true}=Astro.props;const ru=locale==='ru';
+---
+<header class="portfolio-header">
+ <BrandLogo locale={locale} href={ru?'/ru/':'/'} />
+ <nav class="portfolio-nav" aria-label={t(locale, 'navigation.main')}>
+  <a class:list={{'current':active==='home'}} aria-current={active==='home'?'page':undefined} href={ru?'/ru/':'/'}>{t(locale, 'navigation.home')}</a>
+  <a class:list={{'current':active==='consulting'}} aria-current={active==='consulting'?'page':undefined} href={ru?'/ru/consulting/':'/consulting/'}>{t(locale, 'navigation.consulting')}</a>
+ </nav>
+ <div class="portfolio-tools"><div class="portfolio-language" aria-label={t(locale, 'navigation.language')}><a href={`/ru${path}`} lang="ru" aria-current={ru?'true':undefined}>RU</a><span aria-hidden="true">/</span><a href={translated?path:'/consulting/'} lang="en" aria-current={!ru?'true':undefined}>EN</a></div><button class="portfolio-theme" type="button" aria-label={t(locale, 'theme.toggle')} data-portfolio-theme><Icon name="lucide:moon" class="theme-moon"/><Icon name="lucide:sun" class="theme-sun"/></button></div>
+</header>
+<script>
+ document.querySelectorAll<HTMLButtonElement>('[data-portfolio-theme]').forEach(button=>{
+  button.addEventListener('click',()=>{
+   const dark=document.documentElement.classList.toggle('dark');
+   try{localStorage.setItem('theme',dark?'dark':'light');}catch{}
+  });
+ });
+</script>

@@ -34,8 +34,8 @@ const iconColors: Record<LinkVariant, string> = {
 
 <a
   href={href}
-  target={href.startsWith('mailto:') ? undefined : '_blank'}
-  rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+  target={href.startsWith('mailto:') || href.startsWith('/') ? undefined : '_blank'}
+  rel={href.startsWith('mailto:') || href.startsWith('/') ? undefined : 'noopener noreferrer'}
   class:list={[
     'link-button-enter w-full flex items-center gap-3 px-4 py-3 rounded-lg border-[1.5px] text-sm font-medium text-foreground transition-all duration-150 hover:scale-[1.02]',
     variantStyles[variant],

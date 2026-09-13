@@ -1,0 +1,18 @@
+---
+import { t, type Locale } from '@/i18n/ui';
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '@/components/portfolio/SiteHeader.astro';
+import '@/styles/consulting.css';
+interface Props { title: string; description: string; path: string; detail?: boolean; locale?: Locale; }
+const { title, description, path, detail = false, locale='ru' } = Astro.props;
+const ru=locale==='ru';const base=ru?'/ru/consulting/':'/consulting/';const translated=path!=='/consulting/global-talent/';
+---
+<BaseLayout locale={locale} title={`${title} — ${t(locale, 'profile.name')}`} description={description} path={path} translated={translated}>
+ <a class="consulting-skip" href="#consulting-content">{t(locale, 'navigation.skip')}</a>
+ <div class="consulting-shell">
+  <SiteHeader locale={locale} active="consulting" path={path} translated={translated} />
+  {detail&&<nav class="consulting-breadcrumb" aria-label={t(locale, 'consulting.navigation')}><a href={base}>← {t(locale, 'consulting.all')}</a></nav>}
+  <main id="consulting-content" class="consulting-main"><slot /></main>
+  <footer class="consulting-footer"><span>© {new Date().getFullYear()} {t(locale, 'profile.name')}</span><a href={ru?'/ru/':'/'}>{t(locale, 'navigation.backHome')} ↗</a></footer>
+ </div>
+</BaseLayout>

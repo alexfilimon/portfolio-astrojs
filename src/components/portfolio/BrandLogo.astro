@@ -1,0 +1,6 @@
+---
+import { t, type Locale } from '@/i18n/ui';
+interface Props { href?: string; locale?: Locale; }
+const {href='/ru/',locale='ru'}=Astro.props;
+---
+<a class="brand-logo" href={href} aria-label={t(locale, 'brand.home')}><span class="brand-full">alexfilimon<span class="brand-accent">.dev</span></span><span class="brand-short" aria-hidden="true">af<span class="brand-accent">.</span></span></a>

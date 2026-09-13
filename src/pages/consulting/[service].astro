@@ -1,0 +1,11 @@
+---
+import ServicePage from '@/components/consulting/ServicePage.astro';
+import {englishServices} from '@/data/consulting-en';
+// Keep detail pages available locally without publishing them in the static build.
+export function getStaticPaths() {
+  if (!import.meta.env.DEV) return [];
+  return englishServices.map(service => ({ params: { service: service.slug }, props: { service } }));
+}
+const {service}=Astro.props;
+---
+<ServicePage service={service} locale="en"/>
